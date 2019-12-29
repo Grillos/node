@@ -1,0 +1,21 @@
+podTemplate(
+    containers: 
+    [containerTemplate(args: 'cat', command: '/bin/sh -c', image: 'javauto/vortics-primary', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'vortics-primary', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/agent')], 
+    label: 'vortics-primary', 
+    name: 'vortics-primary', 
+    namespace: 'development', 
+    yaml: '') {
+        node('vortics-primary') {
+            stage('build') {
+                echo 'Start Build'
+            }
+            stage('checkout') {
+                echo 'Start checkout'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: 'git@tardis.loopedsquare.net:tardis/ogrons.git']]])
+            }
+            stage('deploy') {
+                echo 'Start deploy'
+            }
+
+        }
+}

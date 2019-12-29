@@ -23,6 +23,7 @@ services:
       - proxy
       - worker
   account: 
+    image: javauto/account-latest
     build: ./account
     volumes: 
       - ./account:/account
@@ -38,6 +39,7 @@ services:
       - db
       - nginx
   quiz: 
+    image: javauto/quiz-latest
     build: ./quiz
     volumes: 
       - ./quiz:/quiz
